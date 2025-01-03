@@ -5,6 +5,7 @@ use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\LicenciaturaController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\ProgramaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,3 +53,10 @@ Route::post('/directivos/editar/{id}', [DirectivoController::class, 'update']);
 
 Route::get('/cuestionarios',[CuestionarioController::class,'index']);
 Route::post('/cuestionarios/consulta', [CuestionarioController::class, 'consulta']);
+
+Route::get('/programas',[ProgramaController::class,'index']);
+Route::post('/programas/agregarPrograma',[ProgramaController::class,'create']);
+Route::get('/programas/borrar/{id}', [ProgramaController::class, 'destroy']);
+Route::get('/programas/editar/{id}',[ProgramaController::class, 'edit']);
+Route::post('/programas/editar/{id}', [ProgramaController::class, 'update']);
+
