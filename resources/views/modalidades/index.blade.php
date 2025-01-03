@@ -1,26 +1,18 @@
 @extends('adminlte::page')
 
-@section('title', 'UEH Evaluación Docente - Semestres')
+@section('title', 'UEH Evaluación Docente - Modalidades')
 
 @section('content_header')
-    <h1>Catálogo de Semestres</h1>
+    <h1>Catálogo de Modalidades</h1>
 @stop
 
 @section('content')
         <div class="container mt-5">
-            <form method="POST" action="/semestres/agregarSemestre">
+            <form method="POST" action="/modalidades/agregarModalidad">
                 @csrf
                 <div class="form-group mb-2">
                     <label>Nombre</label>
                     <input type="text" class="form-control" name="nombre" placeholder="Nombre">
-                </div>
-                <div class="form-group mb-2">
-                    <label>Grupo</label>
-                    <input type="text" class="form-control" name="grupo" placeholder="Grupo">
-                </div>
-                <div class="form-group mb-2">
-                    <label>Alumnos</label>
-                    <input type="number" class="form-control" name="alumnos" placeholder="Grupo">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
@@ -29,20 +21,16 @@
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Grupo</th>
-                        <th scope="col">Alumnos</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if (count($semestres) > 0)
-                        @foreach ($semestres as $semestre)
+                    @if (count($modalidades) > 0)
+                        @foreach ($modalidades as $modalidad)
                             <tr>
-                                <th>{{ $semestre->id }}</th>
-                                <th>{{ $semestre->nombre }}</th>
-                                <th>{{ $semestre->grupo }}</th>
-                                <th>{{ $semestre->alumnos }}</th>
-                                <th><a href="/semestres/editar/{{ $semestre->id }}" class="btn btn-primary">Editar</a>
-                                    <a href="/semestres/borrar/{{ $semestre->id }}" class="btn btn-danger">Borrar</a>
+                                <th>{{ $modalidad->id }}</th>
+                                <th>{{ $modalidad->nombre }}</th>
+                                <th><a href="/modalidades/editar/{{ $modalidad->id }}" class="btn btn-primary">Editar</a>
+                                    <a href="/modalidades/borrar/{{ $modalidad->id }}" class="btn btn-danger">Borrar</a>
                                 </th>
                             </tr>
                         @endforeach

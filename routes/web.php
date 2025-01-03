@@ -7,6 +7,7 @@ use App\Http\Controllers\LicenciaturaController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\CuestionarioController;
 use App\Http\Controllers\MateriaController;
+use App\Http\Controllers\ModalidadController;
 use App\Http\Controllers\ProgramaController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,3 +70,6 @@ Route::get('/materias',[MateriaController::class,'index']);
 Route::post('/materias/agregarMateria', [MateriaController::class, 'add']);
 Route::get('/materias/editar/{id}',[MateriaController::class, 'edit']);
 Route::post('/materias/editar/{id}', [MateriaController::class, 'update']);
+
+Route::get('/modalidades',[ModalidadController::class,'index']);
+Route::post('/modalidades/agregarModalidad', [ModalidadController::class, 'create']);

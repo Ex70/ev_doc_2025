@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Licenciatura;
+use App\Models\Modalidad;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 
 class ProgramaController extends Controller{
     public function index(){
         $programas = Programa::all();
-        return view ('programas.index')->with("programas",$programas);
+        $licenciaturas = Licenciatura::all();
+        $modalidades = Modalidad::all();
+        return view('programas.index', compact('programas','licenciaturas','modalidades'));
     }
 
     public function create(Request $req){
         $programa = new Programa();
         $programa->nombre = $req->nombre;
+        $programa->id_licenciatura = $req->id_licenciatura;
+        $programa->id_modalidad = $req->id_modalidad;
         $programa->save();
         return redirect('/programas');
     }

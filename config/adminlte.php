@@ -304,6 +304,7 @@ return [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
+            'can' => 'directivo'
         ],
         [
             'type' => 'fullscreen-widget',
@@ -327,60 +328,91 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        // [
+        //     'text' => 'multilevel',
+        //     'icon' => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                 ],
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //     ],
+        // ],
+        ['header' => 'Catálogos'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Licenciaturas',
+            'url' => 'licenciaturas',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Alumnos',
+            'url' => 'alumnos',
+            'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
+            'text' => 'Semestres',
+            'url' => 'semestres',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Programas',
+            'url' => 'programas',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Docentes',
+            'url' => 'docentes',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Materias',
+            'url' => 'materias',
+            'icon' => 'fas fa-fw fa-user',
         ],
         ['header' => 'labels'],
         [
-            'text' => 'important',
+            'text' => 'Restantes',
             'icon_color' => 'red',
-            'url' => '#',
+            'url' => 'cuestionarios/consulta',
         ],
         [
             'text' => 'warning',

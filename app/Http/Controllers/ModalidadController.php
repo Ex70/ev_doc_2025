@@ -5,61 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Modalidad;
 use Illuminate\Http\Request;
 
-class ModalidadController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+class ModalidadController extends Controller{
+    public function index(){
+        $modalidades = Modalidad::all();
+        return view ('modalidades.index')->with("modalidades",$modalidades);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function create(Request $req){
+        $modalides = new Modalidad();
+        $modalides->nombre = $req->nombre;
+        $modalides->save();
+        return redirect('/modalidades');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function edit(Request $req){
+        $licenciatura = Licenciatura::find($req->id);
+        return view('licenciaturas.editar')->with("licenciatura",$licenciatura);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Modalidad $modalidad)
-    {
-        //
+    public function update(Request $req){
+        $licenciatura=Licenciatura::find($req->id);
+        $licenciatura->update([
+            'siglas' => $req->siglas,
+            'nombre' => $req->nombre
+        ]);
+        return redirect('/licenciaturas');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Modalidad $modalidad)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Modalidad $modalidad)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Modalidad $modalidad)
-    {
-        //
+    public function destroy(Request $req){
+        $licenciatura = Licenciatura::find($req->id);
+        $licenciatura->delete();
+        return redirect('/licenciaturas');
     }
 }
