@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\LicenciaturaController;
 use App\Http\Controllers\SemestreController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,9 @@ Route::post('/semestres/agregarSemestre',[SemestreController::class,'create']);
 Route::get('/semestres/borrar/{id}', [SemestreController::class, 'destroy']);
 Route::get('/semestres/editar/{id}',[SemestreController::class, 'edit']);
 Route::post('/semestres/editar/{id}', [SemestreController::class, 'update']);
+
+Route::get('/docentes',[DocenteController::class,'index']);
+Route::post('/docentes/agregarDocente',[DocenteController::class,'create']);
+Route::get('/docentes/borrar/{id}', [DocenteController::class, 'destroy']);
+Route::get('/docentes/editar/{id}',[DocenteController::class, 'edit']);
+Route::post('/docentes/editar/{id}', [DocenteController::class, 'update']);
