@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LicenciaturaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/licenciaturas',[LicenciaturaController::class,'index']);
+Route::post('/licenciaturas/agregarLicenciatura',[LicenciaturaController::class,'create']);
+Route::get('/licenciaturas/borrar/{id}', [LicenciaturaController::class, 'destroy']);
+Route::get('/licenciaturas/editar/{id}',[LicenciaturaController::class, 'edit']);
+Route::post('/licenciaturas/editar/{id}', [LicenciaturaController::class, 'update']);
