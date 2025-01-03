@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\DirectivoController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\LicenciaturaController;
 use App\Http\Controllers\SemestreController;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\ProgramaController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +62,10 @@ Route::get('/programas/borrar/{id}', [ProgramaController::class, 'destroy']);
 Route::get('/programas/editar/{id}',[ProgramaController::class, 'edit']);
 Route::post('/programas/editar/{id}', [ProgramaController::class, 'update']);
 
+Route::get('/alumnos',[AlumnoController::class,'index']);
+Route::post('/alumnos/agregarAlumno', [AlumnoController::class, 'add']);
+
+Route::get('/materias',[MateriaController::class,'index']);
+Route::post('/materias/agregarMateria', [MateriaController::class, 'add']);
+Route::get('/materias/editar/{id}',[MateriaController::class, 'edit']);
+Route::post('/materias/editar/{id}', [MateriaController::class, 'update']);
