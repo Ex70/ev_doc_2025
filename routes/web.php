@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DirectivoController;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\LicenciaturaController;
 use App\Http\Controllers\SemestreController;
@@ -41,3 +42,9 @@ Route::post('/docentes/agregarDocente',[DocenteController::class,'create']);
 Route::get('/docentes/borrar/{id}', [DocenteController::class, 'destroy']);
 Route::get('/docentes/editar/{id}',[DocenteController::class, 'edit']);
 Route::post('/docentes/editar/{id}', [DocenteController::class, 'update']);
+
+Route::get('/directivos',[DirectivoController::class,'index']);
+Route::post('/directivos/agregarDirectivo',[DirectivoController::class,'create']);
+Route::get('/directivos/borrar/{id}', [DirectivoController::class, 'destroy']);
+Route::get('/directivos/editar/{id}',[DirectivoController::class, 'edit']);
+Route::post('/directivos/editar/{id}', [DirectivoController::class, 'update']);
