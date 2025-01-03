@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LicenciaturaController;
+use App\Http\Controllers\SemestreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,9 @@ Route::post('/licenciaturas/agregarLicenciatura',[LicenciaturaController::class,
 Route::get('/licenciaturas/borrar/{id}', [LicenciaturaController::class, 'destroy']);
 Route::get('/licenciaturas/editar/{id}',[LicenciaturaController::class, 'edit']);
 Route::post('/licenciaturas/editar/{id}', [LicenciaturaController::class, 'update']);
+
+Route::get('/semestres',[SemestreController::class,'index']);
+Route::post('/semestres/agregarSemestre',[SemestreController::class,'create']);
+Route::get('/semestres/borrar/{id}', [SemestreController::class, 'destroy']);
+Route::get('/semestres/editar/{id}',[SemestreController::class, 'edit']);
+Route::post('/semestres/editar/{id}', [SemestreController::class, 'update']);
