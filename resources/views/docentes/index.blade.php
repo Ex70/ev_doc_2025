@@ -6,6 +6,27 @@
     <h1>Catálogo de Docentes</h1>
 @stop
 
+{{-- Setup data for datatables --}}
+@php
+$heads = [
+    'ID',
+    'Nombre',
+    'Correo',
+    ['label' => 'Actions', 'no-export' => true, 'width' => 5],
+];
+
+$btnEdit = '<button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                <i class="fa fa-lg fa-fw fa-pen"></i>
+            </button>';
+$btnDelete = '<button class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                  <i class="fa fa-lg fa-fw fa-trash"></i>
+              </button>';
+$btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
+                   <i class="fa fa-lg fa-fw fa-eye"></i>
+               </button>';
+
+@endphp
+
 @section('content')
         <div class="container mt-5">
             <form method="POST" action="/docentes/agregarDocente">
@@ -24,7 +45,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
-            <table class="table mt-5">
+            <x-adminlte-datatable id="table1" :heads="$heads">
+            {{-- <table class="table mt-5"> --}}
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
@@ -50,7 +72,8 @@
                         </tr>
                     @endif
                 </tbody>
-            </table>
+            </x-adminlte-datatable>
+        {{-- </table> --}}
         </div>
         @stop
 

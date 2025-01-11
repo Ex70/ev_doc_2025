@@ -15,10 +15,10 @@ class MateriaController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $semestres = Semestre::all();
+        $semestres = Semestre::orderBy('nombre')->get();
         $programas = Programa::all();
-        $licenciaturas = Licenciatura::all();
-        $docentes = Docente::all();
+        $licenciaturas = Licenciatura::orderBy('nombre')->get();
+        $docentes = Docente::orderBy('nombre')->get();
         // $programa = Programa::find(1);
         // $materias = $programas->materias;
         $materias = Materia::all();

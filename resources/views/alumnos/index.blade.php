@@ -39,7 +39,7 @@
                             <label class="form-label">Seleccione el semestre actual</label>
                             <select required name="id_semestre" class="form-control">
                                 @foreach ($semestres as $semestre)
-                                    <option value="{{ $semestre->id }}">{{ $semestre->nombre }}</option>
+                                    <option value="{{ $semestre->id }}">{{ $semestre->nombre}} - {{$semestre->grupo}}</option>
                                 @endforeach
                             </select>
                             @error('id_semestre')

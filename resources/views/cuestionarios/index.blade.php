@@ -53,81 +53,87 @@
         <table align="center" style="border: 3px #000000 solid">
             <thead>
                 <tr>
-                    <th style="border: 3px #000000 solid">N°</th>
-                    <th style="border: 3px #000000 solid">Fotografía</th>
-                    <th style="border: 3px #000000 solid">Nombre del docente</th>
-                    <th style="border: 3px #000000 solid">Asignatura</th>
-                    <th style="border: 3px #000000 solid">Grupo</th>
-                    <th style="border: 3px #000000 solid"># Alumnos</th>
-                    <th style="border: 3px #000000 solid">Eval. Alumnos %</th>
-                    <th style="border: 3px #000000 solid">% total</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >N°</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Fotografía</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Nombre del docente</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Asignatura</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Grupo</th>
+                    <th style="border: 3px #000000 solid" class="text-center" ># Alumnos</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Eval. Alumnos %</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >Final Alumnos % TOTAL</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >HORAS CICLO</th>
+                    <th style="border: 3px #000000 solid" class="text-center" >OBSERVACIONES</th>
+                    {{-- <th style="border: 3px #000000 solid">% total</th>
                     <th style="border: 3px #000000 solid">Horas Ciclo</th>
-                    <th style="border: 3px #000000 solid">Observaciones</th>
+                    <th style="border: 3px #000000 solid">Observaciones</th> --}}
                 </tr>
             </thead>
+
+            <?php
+                $grouped_reports = [];
+                $last_name = null;
+                $group = null;
+                $totalAlumnos=0;
+                foreach ($resultados as $report) {
+                    $cadena=$report->docente;
+                    $guion1=strpos($cadena,'-');
+                    $docente=substr($cadena,0,$guion1);
+                    $cadena2=substr($cadena,$guion1+1);
+                    $guion2=strpos($cadena2,'-');
+                    $materia=substr($cadena2,0,$guion2);
+                    $grupo=substr($cadena2,$guion2+1);
+                    $promedio1=number_format((($report->resultados)*10)/(($report->alumnos)*55),2);
+                    $totalAlumnos += $promedio1;
+                    echo $totalAlumnos.'         =       ';
+
+                    if ($report->docente != $last_name) {
+                        if ($group) {
+                            $grouped_reports[] = $group;
+                        }
+                        $group=[
+                            'docente' => $docente,
+                            // 'foto' => $report->foto,
+                            'materias'=>[]
+                        ];
+                    }
+                    $group['materias'][] = ['asignatura' => $materia, 'grupo' => $grupo, 'alumnos' => $report->alumnos, 'promedio' => $promedio1];
+                }
+                // Add last group to $grouped_reports
+                if ($group) {
+                    $grouped_reports[] = $group;
+                }
+                print_r($grouped_reports);
+            ?>
+
             <tbody>
-                <tr>
-                    <td rowspan="2" style="border: 3px #000000 solid">1</td>
-                    <td rowspan="2" style="border: 3px #000000 solid"> </td>
-                    <td rowspan="2" style="border: 3px #000000 solid">Edgar Hernández Martínez</td>
-                    <td style="border: 3px #000000 solid">Estructura de Datos II</td>
-                    <td style="border: 3px #000000 solid">ISC301</td>
-                    <td style="border: 3px #000000 solid">9</td>
-                    <td style="border: 3px #000000 solid">Promedio 1</td>
-                    <td rowspan="2" style="border: 3px #000000 solid">Promedio 2</td>
-                    <td rowspan="2" style="border: 3px #000000 solid">4 Horas</td>
-                    <td rowspan="2" style="border: 3px #000000 solid">Observaciones totales</td>
-                </tr>
-                <tr>
-                    <td style="border: 3px #000000 solid">Cell 1x2</td>
-                    <td style="border: 3px #000000 solid">Cell 2x2</td>
-                    <td style="border: 3px #000000 solid">Cell 3x2</td>
-                    <td style="border: 3px #000000 solid">Cell 4x2</td>
-                </tr>
-                <tr>
-                    <td style="border: 3px #000000 solid">Cell 1x3</td>
-                    <td style="border: 3px #000000 solid">Cell 2x3</td>
-                    <td style="border: 3px #000000 solid">Cell 3x3</td>
-                    <td style="border: 3px #000000 solid">Cell 4x3</td>
-                </tr>
-                <tr>
-                    <td style="border: 3px #000000 solid">Cell 1x4</td>
-                    <td style="border: 3px #000000 solid">Cell 2x4</td>
-                    <td style="border: 3px #000000 solid">Cell 3x4</td>
-                    <td style="border: 3px #000000 solid">Cell 4x4</td>
-                    <td style="border: 3px #000000 solid">Cell 5x4</td>
-                    <td style="border: 3px #000000 solid">Cell 6x4</td>
-                    <td style="border: 3px #000000 solid">Cell 7x4</td>
-                    <td style="border: 3px #000000 solid">Cell 8x4</td>
-                    <td style="border: 3px #000000 solid">Cell 9x4</td>
-                    <td style="border: 3px #000000 solid">Cell 10x4</td>
-                </tr>
-                <tr>
-                    <td style="border: 3px #000000 solid">Cell 1x5</td>
-                    <td style="border: 3px #000000 solid">Cell 2x5</td>
-                    <td style="border: 3px #000000 solid">Cell 3x5</td>
-                    <td style="border: 3px #000000 solid">Cell 4x5</td>
-                    <td style="border: 3px #000000 solid">Cell 5x5</td>
-                    <td style="border: 3px #000000 solid">Cell 6x5</td>
-                    <td style="border: 3px #000000 solid">Cell 7x5</td>
-                    <td style="border: 3px #000000 solid">Cell 8x5</td>
-                    <td style="border: 3px #000000 solid">Cell 9x5</td>
-                    <td style="border: 3px #000000 solid">Cell 10x5</td>
-                </tr>
-                <tr>
-                    <td style="border: 3px #000000 solid">Cell 1x6</td>
-                    <td style="border: 3px #000000 solid">Cell 2x6</td>
-                    <td style="border: 3px #000000 solid">Cell 3x6</td>
-                    <td style="border: 3px #000000 solid">Cell 4x6</td>
-                    <td style="border: 3px #000000 solid">Cell 5x6</td>
-                    <td style="border: 3px #000000 solid">Cell 6x6</td>
-                    <td style="border: 3px #000000 solid">Cell 7x6</td>
-                    <td style="border: 3px #000000 solid">Cell 8x6</td>
-                    <td style="border: 3px #000000 solid">Cell 9x6</td>
-                    <td style="border: 3px #000000 solid">Cell 10x6</td>
-                </tr>
+                <?php $i=0; foreach ($grouped_reports as $key=>$report){
+                    $rowspan = count($grouped_reports);
+                    if ($key > 0) continue;?>
+                    <tr>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">1</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">FOTO</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{$report['docente']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['asignatura']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['grupo']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['alumnos']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['promedio']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{number_format(($totalAlumnos/count($grouped_reports)),2)}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}"></td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}"></td>
+                    </tr>
+                        <?php foreach ($grouped_reports as $key=>$report){
+                            if ($key < 1) continue;?>
+                            <tr>
+                                    <td style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['asignatura']}}</td>
+                                    <td style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['grupo']}}</td>
+                                    <td style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['alumnos']}}</td>
+                                    <td style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['promedio']}}</td>
+                                </tr>
+                                <?php } ?>
+                <?php } ?>
             </tbody>
         </table>
+        <br><br>
     </div>
 @stop
 

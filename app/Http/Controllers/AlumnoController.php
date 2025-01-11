@@ -70,8 +70,8 @@ class AlumnoController extends Controller{
 
     public function add(Request $req){
         $materia = new Alumno();
-        $materia->matricula = $req->matricula;
-        $materia->correo = $req->correo;
+        $materia->matricula = strtolower($req->matricula);
+        $materia->correo = strtolower($req->correo).'@ueh.edu.mx';
         $materia->nombre = $req->nombre;
         $materia->id_semestre = $req->id_semestre;
         $materia->id_licenciatura = $req->id_licenciatura;

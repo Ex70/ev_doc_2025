@@ -9,6 +9,7 @@ class Cuestionario extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'docente',
         'pregunta1',
         'pregunta2',
         'pregunta3',
