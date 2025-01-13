@@ -63,7 +63,11 @@ class MateriaController extends Controller
      */
     public function update(Request $request, Materia $materia)
     {
-        //
+        $materia=Materia::find($request->id);
+        $materia->update([
+            'horas_ciclo' => $request->horas_ciclo
+        ]);
+        return redirect('/materias');
     }
 
     /**

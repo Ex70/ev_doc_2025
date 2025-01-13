@@ -15,23 +15,28 @@ class CuestionarioController extends Controller{
     /**
      * Display a listing of the resource.
      */
-    public function index(){
-        $total_p1 = $total_p2 = $total_p3 = $total_p4 = $total_p5 = $total_p6 = $total_p7 = $total_p8 = $total_p9 = $total_p10 = $total_p11 = 0;
-        // $total_p1 = Cuestionario::sum('pregunta1','pregunta2','pregunta3','pregunta4','pregunta5','pregunta6','pregunta7','pregunta8','pregunta9','pregunta10','pregunta11')->where('docente','like','%Elia Abadesa González Rodríguez%')->get();
-        $total_p1 = Cuestionario::where('docente','like','%Elia Abadesa González Rodríguez%')
-        ->sum(\DB::raw('pregunta1 + pregunta2 + pregunta3 + pregunta4 + pregunta5 + pregunta6 + pregunta7 + pregunta8 + pregunta9 + pregunta10+pregunta11'));
-        // dd($total_p1);
-
-        $resultados=DB::table('cuestionarios')->select(['docente',
-            DB::raw('COUNT(distinct correo) as alumnos'),
-            DB::raw('SUM(pregunta1+pregunta2+pregunta3+pregunta4+pregunta5+pregunta6+pregunta7+pregunta8+pregunta9+pregunta10+pregunta11) as resultados')])
-            ->where('docente','like','%Elia Abadesa González Rodríguez%')
-            ->groupBy('docente')
-            ->get();
-            // dd($resultados);
-
-        // select count(distinct correo) as "alumnos", docente, sum(pregunta1+pregunta2+pregunta3+pregunta4+pregunta5+pregunta6+pregunta7+pregunta8+pregunta9+pregunta10+pregunta11) as resultados from cuestionarios where docente like '%Elia Abadesa González Rodríguez%' group by docente;
-
+    public function index(Request $req){
+        $observ = "";
+        $resultados = "";
+        $horas = "";
+        if(isset($req->id_docente)){
+            // dd("HOLA");
+            // $total_p1 = $total_p2 = $total_p3 = $total_p4 = $total_p5 = $total_p6 = $total_p7 = $total_p8 = $total_p9 = $total_p10 = $total_p11 = 0;
+            // $total_p1 = Cuestionario::sum('pregunta1','pregunta2','pregunta3','pregunta4','pregunta5','pregunta6','pregunta7','pregunta8','pregunta9','pregunta10','pregunta11')->where('docente','like','%Elia Abadesa González Rodríguez%')->get();
+            // $total_p1 = Cuestionario::where('docente','like','%Elia Abadesa González Rodríguez%')
+            // ->sum(\DB::raw('pregunta1 + pregunta2 + pregunta3 + pregunta4 + pregunta5 + pregunta6 + pregunta7 + pregunta8 + pregunta9 + pregunta10+pregunta11'));
+            // dd($total_p1);
+            $maestro=Docente::select('nombre')->where('id',$req->id_docente)->get();
+            $horas=Materia::where('id_docente',$req->id_docente)->sum('horas_ciclo');
+            // dd($horas);
+            $resultados=DB::table('cuestionarios')->select(['docente',
+                DB::raw('COUNT(distinct correo) as alumnos'),
+                DB::raw('SUM(pregunta1+pregunta2+pregunta3+pregunta4+pregunta5+pregunta6+pregunta7+pregunta8+pregunta9+pregunta10+pregunta11) as resultados')])
+                ->where('docente','like',"%".$maestro[0]->nombre."%")
+                ->groupBy('docente')
+                ->get();
+        // dd($docente->id_docente);
+        // dd($docente[0]->nombre);
         $cadenaPrueba=Cuestionario::latest()->first();
         // dd(e($cadenaPrueba->docente));
         $cadena="Daniel Sandria Flores-Seminario II de Proyectos de Investigación ( Ciencia de Datos)-ISC901";
@@ -44,32 +49,20 @@ class CuestionarioController extends Controller{
         // dd($materia);
         $grupo=substr($cadena2,$guion2+1);
         // dd($grupo);
-        $cuestionarios = Cuestionario::all()->toArray();
-        // dd($cuestionarios[0]['pregunta1']);
-        foreach ($cuestionarios as $value => $cuestionario) {
-            // dd($cuestionario['pregunta1']);
-            $total_p1+= $cuestionario['pregunta1'];
-            $total_p2+= $cuestionario['pregunta2'];
-            $total_p3+= $cuestionario['pregunta3'];
-            $total_p4+= $cuestionario['pregunta4'];
-            $total_p5+= $cuestionario['pregunta5'];
-            $total_p6+= $cuestionario['pregunta6'];
-            $total_p7+= $cuestionario['pregunta7'];
-            $total_p8+= $cuestionario['pregunta8'];
-            $total_p9+= $cuestionario['pregunta9'];
-            $total_p10+= $cuestionario['pregunta10'];
-            $total_p11+= $cuestionario['pregunta11'];
+        $observaciones = Cuestionario::select('pregunta12')->where('docente','like',"%".$maestro[0]->nombre."%")->whereRaw('char_length(pregunta12) > 2')->get();
+        // dd($observaciones);
+        foreach ($observaciones as $value => $observacion) {
+            // dd($observacion);
+            $observ.= $observacion['pregunta12'].PHP_EOL.PHP_EOL;
         }
-        // dd($total_p1+$total_p1);
-        $semestres = Semestre::all();
-        $programas = Programa::all();
-        $licenciaturas = Licenciatura::all();
-        $docentes = Docente::all();
-        $materias = Materia::all();
-        // dd($depreciaciones);
-
-        
-        return view('cuestionarios.index', compact('semestres','programas','licenciaturas','docentes','materias','cuestionarios','resultados'));
+    }
+        $cuestionarios = Cuestionario::all()->toArray();
+        // $semestres = Semestre::all();
+        // $programas = Programa::all();
+        // $licenciaturas = Licenciatura::all();
+        // $materias = Materia::all();
+        $docentes=Docente::orderBy('nombre', 'ASC')->get();
+        return view('cuestionarios.index', compact('docentes','cuestionarios','resultados','observ','horas'));
     }
 
     /**

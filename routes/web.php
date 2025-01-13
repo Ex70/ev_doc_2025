@@ -55,6 +55,7 @@ Route::get('/directivos/editar/{id}',[DirectivoController::class, 'edit']);
 Route::post('/directivos/editar/{id}', [DirectivoController::class, 'update']);
 
 Route::get('/cuestionarios',[CuestionarioController::class,'index']);
+Route::post('/cuestionarios',[CuestionarioController::class,'index']);
 Route::post('/cuestionarios/consulta', [CuestionarioController::class, 'consulta']);
 
 Route::get('/programas',[ProgramaController::class,'index']);

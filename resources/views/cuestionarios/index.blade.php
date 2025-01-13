@@ -12,34 +12,16 @@
             <div class="col-md-6 offset-md-3">
                 <div class="card p-3">
                     <h5>Consultar formularios restantes</h5>
-                    <form method="POST" enctype="multipart/form-data" action="/cuestionarios/consulta">
+                    <form method="POST" enctype="multipart/form-data" action="/cuestionarios/">
                         @csrf
                         <div class="form-group mb-3">
-                            <label class="form-label">Correo/Matrícula</label>
-                            <input name="correo" required class="form-control" placeholder="Ingrese correo del alumno" />
-                            @error('correo')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Seleccione grupo</label>
-                            <select required name="grupo" class="form-control">
-                                @foreach ($semestres as $semestre)
-                                    <option value="{{ $semestre->id }}">{{ $semestre->nombre }} - {{$semestre->grupo}}</option>
+                            <label class="form-label">Seleccione docente</label>
+                            <select required name="id_docente" class="form-control">
+                                @foreach ($docentes as $docente)
+                                    <option value="{{ $docente->id }}">{{ $docente->nombre }}</option>
                                 @endforeach
                             </select>
-                            @error('grupo')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group mb-3">
-                            <label class="form-label">Seleccione programa</label>
-                            <select required name="programa" class="form-control">
-                                @foreach ($programas as $programa)
-                                    <option value="{{ $programa->id }}">{{ $programa->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('programa')
+                            @error('docente')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -50,6 +32,7 @@
                 </div>
             </div>
         </div>
+        @if($resultados != "")
         <table align="center" style="border: 3px #000000 solid">
             <thead>
                 <tr>
@@ -84,7 +67,7 @@
                     $grupo=substr($cadena2,$guion2+1);
                     $promedio1=number_format((($report->resultados)*10)/(($report->alumnos)*55),2);
                     $totalAlumnos += $promedio1;
-                    echo $totalAlumnos.'         =       ';
+                    echo $cadena.'         =       ';
 
                     if ($report->docente != $last_name) {
                         if ($group) {
@@ -102,7 +85,8 @@
                 if ($group) {
                     $grouped_reports[] = $group;
                 }
-                print_r($grouped_reports);
+                // $textoPrueba = str_replace("<br />", PHP_EOL, nl2br($observ));
+                print_r(nl2br($observ));
             ?>
 
             <tbody>
@@ -112,14 +96,14 @@
                     <tr>
                         <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">1</td>
                         <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">FOTO</td>
-                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{$report['docente']}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{$docente}}</td>
                         <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['asignatura']}}</td>
                         <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['grupo']}}</td>
                         <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['alumnos']}}</td>
                         <td  style="border: 3px #000000 solid" class="text-center">{{$report['materias'][0]['promedio']}}</td>
                         <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{number_format(($totalAlumnos/count($grouped_reports)),2)}}</td>
-                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}"></td>
-                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}"></td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{{$horas}}</td>
+                        <td  style="border: 3px #000000 solid" class="text-center" rowspan="{{$rowspan}}">{!! nl2br(e($observ)) !!}</td>
                     </tr>
                         <?php foreach ($grouped_reports as $key=>$report){
                             if ($key < 1) continue;?>
@@ -133,6 +117,7 @@
                 <?php } ?>
             </tbody>
         </table>
+        @endif
         <br><br>
     </div>
 @stop

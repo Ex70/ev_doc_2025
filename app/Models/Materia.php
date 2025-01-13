@@ -14,7 +14,8 @@ class Materia extends Model
         'id_semestre',
         'id_programa',
         'id_licenciatura',
-        'id_docente'
+        'id_docente',
+        'horas_ciclo'
     ];
 
     public function semestre(){

@@ -21,6 +21,10 @@
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="form-group mb-2">
+                            <label>Horas Ciclo</label>
+                            <input type="number" class="form-control" name="horas_ciclo" placeholder="Horas Ciclo">
+                        </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Seleccione semestre</label>
                             <select required name="id_semestre" class="form-control">
@@ -89,7 +93,7 @@
                                 <th>{{ $materia->id }}</th>
                                 <th>{{ $materia->nombre }}</th>
                                 <th>{{ $materia->licenciatura->siglas}}</th>
-                                <th>{{ $materia->semestre->nombre}}</th>
+                                <th>{{ $materia->semestre->nombre}} - {{ $materia->semestre->grupo}}</th>
                                 <th>{{ $materia->docente->nombre}}</th>
                                 <th><a href="/materias/editar/{{ $materia->id }}" class="btn btn-primary">Editar</a>
                                     <a href="/materias/borrar/{{ $materia->id }}" class="btn btn-danger">Borrar</a>
