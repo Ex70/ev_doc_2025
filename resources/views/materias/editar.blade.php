@@ -20,7 +20,7 @@
         </div> --}}
         <div class="form-group mb-2">
             <label>Horas Ciclo</label>
-            <input type="number" class="form-control" name="horas_ciclo" placeholder="Horas ciclo" value="{{$materia->horas_ciclo}}">
+            <input type="number" class="form-control" name="horas_ciclo" placeholder="Horas ciclo" step="0.5" value="{{$materia->horas_ciclo}}">
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>

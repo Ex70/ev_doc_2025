@@ -19,6 +19,7 @@ class CuestionarioController extends Controller{
         $observ = "";
         $resultados = "";
         $horas = "";
+        $maestro="";
         if(isset($req->id_docente)){
             // dd("HOLA");
             // $total_p1 = $total_p2 = $total_p3 = $total_p4 = $total_p5 = $total_p6 = $total_p7 = $total_p8 = $total_p9 = $total_p10 = $total_p11 = 0;
@@ -26,7 +27,7 @@ class CuestionarioController extends Controller{
             // $total_p1 = Cuestionario::where('docente','like','%Elia Abadesa González Rodríguez%')
             // ->sum(\DB::raw('pregunta1 + pregunta2 + pregunta3 + pregunta4 + pregunta5 + pregunta6 + pregunta7 + pregunta8 + pregunta9 + pregunta10+pregunta11'));
             // dd($total_p1);
-            $maestro=Docente::select('nombre')->where('id',$req->id_docente)->get();
+            $maestro=Docente::select('nombre','foto')->where('id',$req->id_docente)->get();
             $horas=Materia::where('id_docente',$req->id_docente)->sum('horas_ciclo');
             // dd($horas);
             $resultados=DB::table('cuestionarios')->select(['docente',
@@ -62,7 +63,7 @@ class CuestionarioController extends Controller{
         // $licenciaturas = Licenciatura::all();
         // $materias = Materia::all();
         $docentes=Docente::orderBy('nombre', 'ASC')->get();
-        return view('cuestionarios.index', compact('docentes','cuestionarios','resultados','observ','horas'));
+        return view('cuestionarios.index', compact('docentes','cuestionarios','resultados','observ','horas','maestro'));
     }
 
     /**

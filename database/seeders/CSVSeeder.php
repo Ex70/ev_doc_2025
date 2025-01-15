@@ -12,19 +12,28 @@ use League\Csv\Reader;
 class CSVSeeder extends Seeder{
     public function run(): void{
         // $csv = Reader::createFromPath(database_path() . '/csv/datosMixto-01042025.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ISC701.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ISC501.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ISC301.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ISC101.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/IND701.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/IND301.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/IME701.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/IME301.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/IME101.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ901.csv', 'r');
         // $csv = Reader::createFromPath(database_path() . '/csv/ARQ501.csv', 'r');
-        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ301.csv', 'r');
         // $csv = Reader::createFromPath(database_path() . '/csv/ARQ101.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ301.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ501.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ701.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ARQ901.csv', 'r');
+        // INGENIERÍA MECATRÓNICA ESCOLARIZADO
+        // $csv = Reader::createFromPath(database_path() . '/csv/IME101.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/IME301.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/IME701.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/IME901.csv', 'r');
+        // INGENIERÍA INDUSTRIAL ESCOLARIZADO
+        // $csv = Reader::createFromPath(database_path() . '/csv/IND301.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/IND701.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/IND901.csv', 'r');
+        // INGENIERÍA SISTEMAS COMPUTACIONALES ESCOLARIZADO
+        // $csv = Reader::createFromPath(database_path() . '/csv/ISC101.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ISC301.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ISC501.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ISC701.csv', 'r');
+        $csv = Reader::createFromPath(database_path() . '/csv/ISC901.csv', 'r');
+
         // MIXTOS
         // $csv = Reader::createFromPath(database_path() . '/csv/ARQ102A.csv', 'r');
         // $csv = Reader::createFromPath(database_path() . '/csv/ARQ102B.csv', 'r');
@@ -36,7 +45,7 @@ class CSVSeeder extends Seeder{
         // $csv = Reader::createFromPath(database_path() . '/csv/ISC302.csv', 'r');
         // $csv = Reader::createFromPath(database_path() . '/csv/ISC502.csv', 'r');
         // $csv = Reader::createFromPath(database_path() . '/csv/ISC702.csv', 'r');
-        $csv = Reader::createFromPath(database_path() . '/csv/ISC902.csv', 'r');
+        // $csv = Reader::createFromPath(database_path() . '/csv/ISC902.csv', 'r');
         $csv->setHeaderOffset(0);
         $csv->setDelimiter(';');
         $csv->setEscape('');
